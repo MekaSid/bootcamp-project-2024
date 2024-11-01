@@ -1,11 +1,21 @@
-import React from "react";
-import Link from "next/link";
+// src/pages/ResumePage.tsx
 
-export default function Resume() {
+import React from 'react';
+import Education from '../../components/resume/Education';
+import Skills from '../../components/resume/Skills';
+import ProfessionalExperience from '../../components/resume/Experience';
+import Projects from '../../components/resume/Projects';
+import styles from './resume.module.css';
+
+const ResumePage: React.FC = () => {
   return (
-    
-    <header>
-      
-    </header>
+    <div className={styles.resumeContainer}>
+      <Education />
+      <Skills />
+      <ProfessionalExperience />
+      <Projects />
+    </div>
   );
-}
+};
+
+export default ResumePage;

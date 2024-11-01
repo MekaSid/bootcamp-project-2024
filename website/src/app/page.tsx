@@ -1,8 +1,7 @@
-// src/app/page.tsx
 
-import Heading from "../components/Heading";
-import ProfileImage from "../components/ProfileImage";
-import Description from "../components/Description";
+import Heading from "../components/mainpage/Heading";
+import ProfileImage from "../components/mainpage/ProfileImage";
+import Description from "../components/mainpage/Description";
 
 export default function Home() {
   return (

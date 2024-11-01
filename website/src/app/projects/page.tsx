@@ -2,7 +2,7 @@
 import React from 'react';
 import MiniProjectCard from './MiniProjectCard';
 import styles from './projects.module.css'; 
-import { projects } from './projectData' 
+import { projects } from '../../data/projectData' 
 
 export default function ProjectsPage() {
   return (
