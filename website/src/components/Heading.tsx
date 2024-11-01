@@ -1,5 +1,5 @@
 
 export default function Heading() {
-    return <h1 className="heading">Hello!</h1>;
+    return <h1 className="heading">Hi!</h1>;
   }
   

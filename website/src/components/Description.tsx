@@ -3,7 +3,7 @@
 export default function Description() {
     return (
       <p className="description">
-        Welcome to my personal web page. Take a look around and enjoy.
+        I'm <strong>Sid Meka</strong> and this is my website
       </p>
     );
   }
