@@ -7,6 +7,7 @@ export interface Blog {
     imageAlt: string;
     slug: string;
 }
+
 //Blog items
 const blogs: Blog[] = [
     {
@@ -25,6 +26,7 @@ const blogs: Blog[] = [
         imageAlt: "Carbonara Dish",
         slug: "making-carbonara"
     },
+    // Add more blog posts as needed
 ];
 
 export default blogs;

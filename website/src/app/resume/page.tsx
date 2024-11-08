@@ -9,7 +9,9 @@ import styles from './resume.module.css';
 
 const ResumePage: React.FC = () => {
   return (
+    
     <div className={styles.resumeContainer}>
+      <h1 className={styles.pageTitle}>Resume</h1>
       <Education />
       <Skills />
       <ProfessionalExperience />

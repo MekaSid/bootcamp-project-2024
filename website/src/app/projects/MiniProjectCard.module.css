@@ -61,3 +61,25 @@
     font-size: 14px;
   }
   
+  .languageIcons {
+    display: flex;
+    gap: 8px;
+    padding-top: 10px;
+  }
+  
+  .languageIcon {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .languageIcon img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.1s;
+  }
+  
+  .languageIcon:hover img {
+    transform: scale(1.2);
+  }

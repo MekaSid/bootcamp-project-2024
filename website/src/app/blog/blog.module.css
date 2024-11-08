@@ -1,0 +1,19 @@
+.container {
+    padding: 40px;
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .pageTitle {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+  
+  .cardContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  
