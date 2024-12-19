@@ -1,28 +1,40 @@
 import React from 'react';
 import styles from './blogCard.module.css';
+import connectDB from '@/database/db';
+import Blog from '../../database/blogSchema';
 
 interface BlogCardProps {
-  title: string;
-  date: string;
-  description: string;
-  imageUrl: string;
-  imageAlt: string;
-  slug: string;
-}
+	title: string;
+	slug: string;
+	date: string;
+	description: string;
+	image: string;  // renamed from image
+	imageAlt: string;  // renamed from image_alt
+	comments?: Comment[]; // make optional if not used
+  }
 
-const BlogCard: React.FC<BlogCardProps> = ({ title, date, description, imageUrl, imageAlt, slug }) => {
-  return (
-    <div className={styles.card}>
-      <a href={`/blog/${slug}`} className={styles.imageLink}>
-        <img src={imageUrl} alt={imageAlt} className={styles.image} />
-      </a>
-      <div className={styles.content}>
-        <h2 className={styles.title}>{title}</h2>
-        <p className={styles.date}>{date}</p>
-        <p className={styles.description}>{description}</p>
-      </div>
-    </div>
-  );
-};
+  
+const BlogCard: React.FC<BlogCardProps> = ({
+	title,
+	date,
+	description,
+	image,
+	imageAlt,
+	slug,
+  }) => {
+	return (
+	  <div className={styles.card}>
+		<a href={`/blog/${slug}`} className={styles.imageLink}>
+		  <img src={image} alt={imageAlt} className={styles.image} />
+		</a>
+		<div className={styles.content}>
+		  <h2 className={styles.title}>{title}</h2>
+		  <p className={styles.date}>{new Date(date).toLocaleDateString()}</p>
+		  <p className={styles.description}>{description}</p>
+		</div>
+	  </div>
+	);
+  };
+  
 
 export default BlogCard;
