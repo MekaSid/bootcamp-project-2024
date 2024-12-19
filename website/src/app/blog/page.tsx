@@ -1,47 +1,39 @@
 import React from "react";
-import BlogPreview from "@/components/blog/blogPreview";
-import connectDB from "@/database/db";
-import BlogModel, {Blog} from "@/database/blogSchema";
-
+import style from "./blog.module.css";
+import BlogPreview from "../../components/blog/blogPreview";
+import Blog from "../../database/blogSchema";
+import connectDB from "../../database/db";
 
 async function getBlogs() {
-    await connectDB();
+  await connectDB(); // function from db.ts before
 
-    try {
-        const blogs = await BlogModel.find().sort({date: -1}).orFail();
-        return blogs;
-    } catch (err) {
-        console.log(err);
-        return [];
-    }
-
+  try {
+    // query for all blogs and sort by date
+    const blogs = await Blog.find().sort({ date: -1 }).orFail();
+    // send a response as the blogs as the message
+    return blogs;
+  } catch (err) {
+    return null;
+  }
 }
 
-
-
-export default async function Blog(){
-
-    const blogList: Blog[] = await getBlogs();
-
-
-    return( 
-        <main>
-            <h1 className="page-title">Blog</h1>
-            <div id="blog-container">
-               {blogList.map(blog => 
-                <BlogPreview 
-                title={blog.title}
-                slug={blog.slug}
-                date={blog.date}
-                description={blog.description}
-                content={blog.content}
-                image={blog.image}
-                imageAlt={blog.imageAlt}
-                comments={blog.comments}
-                 key={blog.title} />
-               )}
-            </div> 
-        </main>
+export default async function Blogs() {
+  const blogs = await getBlogs();
+  if (!blogs) {
+    return (
+      <header className={style.blogs}>
+        <p>No blogs found</p>
+      </header>
     );
-
+  }
+  return (
+    <header className={style.blogs}>
+      <h1 className="page-title">Blogs</h1>
+      <div className={style.blogs}>
+        {blogs.map((blog) => (
+          <BlogPreview key={blog.slug} {...blog.toObject()} />
+        ))}
+      </div>
+    </header>
+  );
 }
