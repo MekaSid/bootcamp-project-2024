@@ -1,0 +1,92 @@
+/* Center the main container on the page */
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main blog container */
+.blogContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+  box-sizing: border-box; /* Ensure padding is included in dimensions */
+}
+
+/* Wrapper for the blog image */
+.blogImageWrapper {
+  position: relative;
+  width: 500px; /* Desired square size */
+  height: 300px; /* Matches width for square aspect ratio */
+  overflow: hidden; /* Ensures image is cropped */
+  margin: 0 auto 20px; /* Centers the image and adds spacing below */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+/* Blog image */
+.blogImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Blog content text */
+.blogContent {
+  margin-top: 20px;
+  line-height: 1.8;
+  font-size: 1.2rem;
+  color: #444;
+  text-align: justify;
+  padding: 0 20px;
+}
+
+/* Page title */
+.pageTitle {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #222;
+  margin-top: 70px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* Comments section */
+.blogComments {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual comment styling */
+.comment {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.commentUser {
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 5px;
+}
+
+.commentContent {
+  color: #555;
+  line-height: 1.5;
+}

@@ -1,0 +1,24 @@
+.commentContainer {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+}
+
+.userName {
+    font-size: 1.2rem;
+    margin: 0 0 5px;
+    color: #333;
+}
+
+.commentText {
+    font-size: 1rem;
+    margin: 5px 0;
+    color: #555;
+}
+
+.commentTime {
+    font-size: 0.8rem;
+    color: #888;
+}

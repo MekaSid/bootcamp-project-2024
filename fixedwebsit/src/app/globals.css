@@ -1,0 +1,41 @@
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.main-content {
+  max-width: 800px;
+  width: 100%;
+}
+
+.content-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.image-container {
+  flex-shrink: 0;
+  margin-right: 20px;
+}
+
+.profile-image {
+  border-radius: 50%;
+}
+
+.text-content {
+  flex: 1;
+}
+
+.heading {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
