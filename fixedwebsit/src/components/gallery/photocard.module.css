@@ -1,0 +1,15 @@
+.container {
+    padding: 20px;
+  }
+  
+  .pageTitle {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .gridContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  

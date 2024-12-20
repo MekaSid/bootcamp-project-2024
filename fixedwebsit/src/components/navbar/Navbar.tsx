@@ -13,8 +13,9 @@ export default function Navbar() {
         <ul className={style.navList}>
             <li><Link href="/">Home</Link></li>
             <li><Link href="/projects">Projects</Link></li>
-            <li><Link href="/resume">Resume</Link></li>
+            <li><Link href="/gallery">Gallery</Link></li>
             <li><Link href="/blogs">Blog</Link></li>
+            <li><Link href="/resume">Resume</Link></li>
             <li><Link href="/contact">Contact</Link></li>
 
         </ul>
