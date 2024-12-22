@@ -4,10 +4,6 @@ import BlogPreview from "../../components/blog/blogPreview";
 import Blog from "../../database/blogSchema";
 import connectDB from "../../database/db";
 
-interface PageProps {
-  params: { slug: string };
-}
-
 async function getBlogs() {
   await connectDB(); // function from db.ts before
 
@@ -22,7 +18,7 @@ async function getBlogs() {
   }
 }
 
-export default async function Blogs({ params }: PageProps) {
+export default async function Blogs() {
   const blogs = await getBlogs();
   if (!blogs) {
     return (
