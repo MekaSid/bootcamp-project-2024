@@ -2,7 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/database/db";
 import blogSchema from "@/database/blogSchema";
 
-export async function GET(req: NextRequest, { params }: { params: { slug: string } }) {
+export async function GET(
+  req: NextRequest,
+  { params, searchParams }: { params: { slug: string }; searchParams: URLSearchParams }
+) {
   const { slug } = params; // Access slug directly from params
   await connectDB(); // Connect to the database
 
