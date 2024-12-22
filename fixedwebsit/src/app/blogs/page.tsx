@@ -4,6 +4,10 @@ import BlogPreview from "../../components/blog/blogPreview";
 import Blog from "../../database/blogSchema";
 import connectDB from "../../database/db";
 
+interface PageProps {
+  params: { slug: string };
+}
+
 async function getBlogs() {
   await connectDB(); // function from db.ts before
 
@@ -13,12 +17,12 @@ async function getBlogs() {
     // send a response as the blogs as the message
     return blogs;
   } catch (err) {
-    console.log(err)
+    console.log(err);
     return null;
   }
 }
 
-export default async function Blogs() {
+export default async function Blogs({ params }: PageProps) {
   const blogs = await getBlogs();
   if (!blogs) {
     return (
