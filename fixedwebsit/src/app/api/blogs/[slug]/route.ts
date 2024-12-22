@@ -4,9 +4,9 @@ import blogSchema from "@/database/blogSchema";
 
 export async function GET(
   req: NextRequest,
-  { params, searchParams }: { params: { slug: string }; searchParams: URLSearchParams }
+  context: { params: { slug: string }; searchParams: URLSearchParams }
 ) {
-  const { slug } = params; // Access slug directly from params
+  const { slug } = context.params; // Access slug from params
   await connectDB(); // Connect to the database
 
   try {
