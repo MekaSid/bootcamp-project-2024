@@ -1,11 +1,10 @@
+// src/app/api/blogs/[slug]/route.ts
+
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/database/db";
 import blogSchema from "@/database/blogSchema";
 
-export async function GET(
-  req: NextRequest,
-  context: { params: { slug: string }; searchParams: URLSearchParams }
-) {
+export async function GET(req: NextRequest, context: any) { // Let TypeScript infer the type
   const { slug } = context.params; // Access slug from params
   await connectDB(); // Connect to the database
 
