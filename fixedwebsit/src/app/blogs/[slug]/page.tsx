@@ -24,7 +24,7 @@ interface BlogScreenProps {
 
 async function getBlog(slug: string): Promise<Blog | null> {
   try {
-    const res = await fetch(`http://localhost:3000/api/blogs/${slug}`, {
+    const res = await fetch(`https://bootcamp-project-2024-sid-mekas-projects.vercel.app/api/blogs/${slug}`, {
       cache: "no-store",
     });
 
