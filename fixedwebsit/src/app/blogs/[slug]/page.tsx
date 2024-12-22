@@ -15,6 +15,10 @@ type Comment = {
   content: string;
 };
 
+interface BlogScreenProps {
+  params: { slug: string };
+}
+
 async function getBlog(slug: string): Promise<Blog | null> {
   try {
     const res = await fetch(`http://localhost:3000/api/blogs/${slug}`, {
@@ -32,7 +36,7 @@ async function getBlog(slug: string): Promise<Blog | null> {
   }
 }
 
-export default async function BlogScreen({ params }: { params: { slug: string } }) {
+const BlogScreen: React.FC<BlogScreenProps> = async ({ params }) => {
   const { slug } = params;
 
   console.log(`Fetching blog for slug: ${slug}`);
@@ -80,4 +84,6 @@ export default async function BlogScreen({ params }: { params: { slug: string } 
       <AddCommentButton slug={slug} />
     </div>
   );
-}
+};
+
+export default BlogScreen;
