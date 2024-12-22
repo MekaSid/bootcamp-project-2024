@@ -1,8 +1,6 @@
-// app/blog/[slug]/page.tsx
-
-import Image from 'next/image';
-import style from './blogpage.module.css';
-import AddCommentButton from '@/components/blog/addComment';
+import Image from "next/image";
+import style from "./blogpage.module.css";
+import AddCommentButton from "@/components/blog/addComment";
 
 type Blog = {
   title: string;
@@ -10,7 +8,7 @@ type Blog = {
   imageAlt: string;
   content: string;
   comments: Comment[];
-  slug: string; // Ensure slug is included if used in AddCommentButton
+  slug: string; // Include if needed
 };
 
 type Comment = {
@@ -25,16 +23,16 @@ interface BlogScreenProps {
 async function getBlog(slug: string): Promise<Blog | null> {
   try {
     const res = await fetch(`http://localhost:3000/api/blogs/${slug}`, {
-      cache: 'no-store',
+      cache: "no-store",
     });
 
     if (!res.ok) {
-      throw new Error('Failed to fetch blog');
+      throw new Error("Failed to fetch blog");
     }
 
     return res.json();
   } catch (err: unknown) {
-    console.error(`Error: ${err instanceof Error ? err.message : 'Unknown error'}`);
+    console.error(`Error: ${err instanceof Error ? err.message : "Unknown error"}`);
     return null;
   }
 }
