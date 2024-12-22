@@ -1,3 +1,5 @@
+// app/blog/[slug]/page.tsx
+
 import Image from "next/image";
 import style from "./blogpage.module.css";
 import AddCommentButton from "@/components/blog/addComment";
@@ -8,7 +10,7 @@ type Blog = {
   imageAlt: string;
   content: string;
   comments: Comment[];
-  slug: string; // Include if needed
+  slug: string;
 };
 
 type Comment = {
@@ -17,7 +19,7 @@ type Comment = {
 };
 
 interface BlogScreenProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 async function getBlog(slug: string): Promise<Blog | null> {
@@ -38,7 +40,9 @@ async function getBlog(slug: string): Promise<Blog | null> {
 }
 
 const BlogScreen = async ({ params }: BlogScreenProps) => {
-  const { slug } = params;
+  // Await the params Promise to get the actual params object
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
 
   console.log(`Fetching blog for slug: ${slug}`);
 
