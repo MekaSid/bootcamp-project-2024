@@ -1,26 +1,40 @@
-import React from "react";
-import PhotoCard from "@/components/gallery/PhotoCard"; // A component to display individual photos
-import styles from "./gallery.module.css";
-import Gallery from "@/database/gallerySchema"; // Import the gallery model
-import connectDB from "@/database/db"; // Import the database connection function
+// app/gallery/page.tsx
+
+import React from 'react';
+import Gallery from '@/components/gallery/Gallery';
+import connectDB from '@/database/db';
+import GalleryModel, { IGallery } from '@/database/gallerySchema';
+
+type Photo = {
+  src: string;
+  alt: string;
+  caption: string;
+};
 
 // Fetch photos from the database
-async function getPhotos() {
+async function getPhotos(): Promise<Photo[]> {
   await connectDB(); // Ensure database connection
 
   try {
-    const photos = await Gallery.find({}); // Query all photos
-    return photos;
+    // Use `.lean()` to get plain JavaScript objects
+    const photos = await GalleryModel.find({}).lean();
+
+    // Convert documents to plain objects with stringified `_id`
+    return photos.map(photo => ({
+      src: photo.src,
+      alt: photo.alt,
+      caption: photo.caption,
+    }));
   } catch (error) {
     console.error("Error fetching photos:", error);
-    return null; // Return null if there's an error
+    return [];
   }
 }
 
-export default async function GalleryPage() {
+const GalleryPage = async () => {
   const photos = await getPhotos();
 
-  if (!photos) {
+  if (!photos.length) {
     return (
       <header>
         <p>No photos found</p>
@@ -28,19 +42,7 @@ export default async function GalleryPage() {
     );
   }
 
-  return (
-    <div className={styles.container}>
-      <h1 className={styles.pageTitle}>Gallery</h1>
-      <div className={styles.gridContainer}>
-        {photos.map((photo, index) => (
-          <PhotoCard
-            key={index}
-            src={photo.src}
-            alt={photo.alt}
-            caption={photo.caption}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
+  return <Gallery photos={photos} />;
+};
+
+export default GalleryPage;

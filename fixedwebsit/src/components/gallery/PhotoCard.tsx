@@ -1,24 +1,33 @@
+// components/gallery/PhotoCard.tsx
+
+"use client";
+
 import React from "react";
 import Image from "next/image";
-import styles from "./photocard.module.css";
+import styles from "./gallery.module.css";
 
-const PhotoCard: React.FC<{ src: string; alt: string; caption: string }> = ({
-  src,
-  alt,
-  caption,
-}) => {
+type Photo = {
+  _id: string;
+  src: string;
+  alt: string;
+  caption: string;
+};
+
+interface PhotoCardProps {
+  photo: Photo;
+  onClick: () => void;
+}
+
+const PhotoCard: React.FC<PhotoCardProps> = ({ photo, onClick }) => {
   return (
-    <div className={styles.photoCard}>
-      <div className={styles.imageWrapper}>
-        <Image
-          src={src}
-          alt={alt}
-          width={300}
-          height={200}
-          style={{ objectFit: "cover", borderRadius: "10px" }}
-        />
-      </div>
-      <p className={styles.caption}>{caption}</p>
+    <div className={styles.card} onClick={onClick}>
+      <Image
+        src={photo.src}
+        alt={photo.alt}
+        width={300}
+        height={200}
+        className={styles.image}
+      />
     </div>
   );
 };
