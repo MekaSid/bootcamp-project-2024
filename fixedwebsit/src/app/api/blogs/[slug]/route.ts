@@ -5,12 +5,17 @@ import connectDB from "@/database/db";
 import blogSchema from "@/database/blogSchema";
 
 interface RouteContext {
-  params: { slug: string };
+  params: { [key: string]: string };
   searchParams: URLSearchParams;
 }
 
 export async function GET(req: NextRequest, context: RouteContext) {
   const { slug } = context.params; // Access slug from params
+
+  if (!slug) {
+    return NextResponse.json({ error: "Slug is missing." }, { status: 400 });
+  }
+
   await connectDB(); // Connect to the database
 
   try {
