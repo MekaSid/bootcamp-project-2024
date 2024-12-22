@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import dbConnect from "@/database/db";
 import Project from "@/database/projectSchema";
 
-export async function GET(req: NextRequest) {
+export async function GET() { // Removed req parameter
   await dbConnect(); // Connect to MongoDB
-  
+
   try {
     const projects = await Project.find({});
     return NextResponse.json(projects, { status: 200 });

@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './blogCard.module.css';
-import connectDB from '@/database/db';
-import Blog from '../../database/blogSchema';
+
 
 interface BlogCardProps {
 	title: string;

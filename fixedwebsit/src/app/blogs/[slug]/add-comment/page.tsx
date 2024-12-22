@@ -1,23 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./AddComment.module.css";
 
 type AddCommentButtonProps = {
-  params: Promise<{ slug: string }>; // Adjusted to expect params as a Promise
+  params: Promise<{ slug: string }>; // Expect params as a Promise
 };
 
 export default function AddCommentButton({ params }: AddCommentButtonProps) {
-  // Unwrap the Promise using React.use
-  const resolvedParams = React.use(params); // Resolve the promise
-  const { slug } = resolvedParams; // Extract slug from resolved params
-
-  const router = useRouter();
+  const [resolvedParams, setResolvedParams] = useState<{ slug: string } | null>(null);
   const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
+
+  // Resolve params asynchronously
+  useEffect(() => {
+    params.then(setResolvedParams).catch((err) => {
+      console.error("Failed to resolve params:", err);
+      setError("Failed to load data.");
+    });
+  }, [params]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,6 +30,12 @@ export default function AddCommentButton({ params }: AddCommentButtonProps) {
     setIsSubmitting(true);
 
     try {
+      if (!resolvedParams) {
+        throw new Error("Missing required data.");
+      }
+
+      const { slug } = resolvedParams;
+
       const response = await fetch(`/api/blogs/${slug}/comments`, {
         method: "POST",
         headers: {
@@ -43,13 +54,19 @@ export default function AddCommentButton({ params }: AddCommentButtonProps) {
 
       // Navigate back to the blog page
       router.push(`/blogs/${slug}`);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Error submitting comment:", err);
-      setError(err.message || "Something went wrong. Please try again.");
+
+      const errorMessage = err instanceof Error ? err.message : "An unknown error occurred.";
+      setError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  if (!resolvedParams) {
+    return <p>Loading...</p>; // Handle loading state
+  }
 
   return (
     <div className={styles.container}>

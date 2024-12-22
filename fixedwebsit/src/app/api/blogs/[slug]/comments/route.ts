@@ -1,8 +1,11 @@
-// src/app/api/blogs/[slug]/comments/route.ts
-
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/database/db";
 import Blog from "@/database/blogSchema"; // Our Mongoose model
+
+interface CommentRequest {
+  user: string;
+  content: string;
+}
 
 export async function POST(req: NextRequest) {
   await connectDB();
@@ -18,9 +21,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { user, content } = await req.json();
+    const body: CommentRequest = await req.json();
 
-    if (!user || !content) {
+    if (!body.user || !body.content) {
       return NextResponse.json(
         { error: "User and content are required" },
         { status: 400 }
@@ -28,15 +31,18 @@ export async function POST(req: NextRequest) {
     }
 
     const blog = await Blog.findOne({ slug }).orFail();
-    blog.comments.push({ user, content, date: new Date() });
+    blog.comments.push({ user: body.user, content: body.content, date: new Date() });
     await blog.save();
 
     return NextResponse.json(blog.comments, { status: 200 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error saving comment:", error);
-    const status = error.name === "DocumentNotFoundError" ? 404 : 500;
+
+    const status = error instanceof Error && error.name === "DocumentNotFoundError" ? 404 : 500;
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+
     return NextResponse.json(
-      { error: "Blog not found." },
+      { error: errorMessage },
       { status }
     );
   }

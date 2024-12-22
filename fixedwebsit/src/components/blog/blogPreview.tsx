@@ -6,11 +6,7 @@ import {IBlog} from "@/database/blogSchema";
 
 export default function BlogPreview(props: IBlog) {
   console.log(props.title);
-  const formattedDate = new Date(props.date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  
 
   return (
     <div className={style.preview}>

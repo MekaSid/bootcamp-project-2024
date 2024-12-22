@@ -3,7 +3,6 @@ import style from "./blog.module.css";
 import BlogPreview from "../../components/blog/blogPreview";
 import Blog from "../../database/blogSchema";
 import connectDB from "../../database/db";
-import BlogCard from "@/components/blog/BlogCard"
 
 async function getBlogs() {
   await connectDB(); // function from db.ts before

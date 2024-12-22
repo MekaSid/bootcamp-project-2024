@@ -1,14 +1,21 @@
-// src/app/blogs/[slug]/page.tsx
-
 import Image from "next/image";
 import style from "./blogpage.module.css";
 import AddCommentButton from "@/components/blog/addComment";
 
-type Props = {
-  params: { slug: string };
+type Blog = {
+  title: string;
+  image: string;
+  imageAlt: string;
+  content: string;
+  comments: Comment[];
 };
 
-async function getBlog(slug: string) {
+type Comment = {
+  user: string;
+  content: string;
+};
+
+async function getBlog(slug: string): Promise<Blog | null> {
   try {
     const res = await fetch(`http://localhost:3000/api/blogs/${slug}`, {
       cache: "no-store",
@@ -20,15 +27,15 @@ async function getBlog(slug: string) {
 
     return res.json();
   } catch (err: unknown) {
-    console.error(`Error: ${err}`);
+    console.error(`Error: ${err instanceof Error ? err.message : "Unknown error"}`);
     return null;
   }
 }
 
 export default async function BlogScreen({ params }: { params: { slug: string } }) {
-  const { slug } = params; // Extract slug from params
+  const { slug } = params;
 
-  console.log(`Submitting comment for slug: ${slug}`);
+  console.log(`Fetching blog for slug: ${slug}`);
 
   const blog = await getBlog(slug);
 
@@ -59,7 +66,7 @@ export default async function BlogScreen({ params }: { params: { slug: string } 
       <div className={style.blogComments}>
         <h3>Comments</h3>
         {blog.comments.length > 0 ? (
-          blog.comments.map((comment: any, index: number) => (
+          blog.comments.map((comment, index) => (
             <div key={index} className={style.comment}>
               <p className={style.commentUser}>{comment.user}</p>
               <p className={style.commentContent}>{comment.content}</p>
