@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import styles from "./addComment.module.css";
+import styles from "./AddComment.module.css";
 
 type AddCommentButtonProps = {
   params: Promise<{ slug: string }>; // Adjusted to expect params as a Promise
