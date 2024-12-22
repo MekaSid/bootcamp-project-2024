@@ -3,7 +3,7 @@
 import React from 'react';
 import Gallery from '@/components/gallery/Gallery';
 import connectDB from '@/database/db';
-import GalleryModel, { IGallery } from '@/database/gallerySchema';
+import GalleryModel from '@/database/gallerySchema';
 
 type Photo = {
   src: string;
