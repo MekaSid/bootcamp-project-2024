@@ -1,0 +1,92 @@
+/* Container for the entire page */
+.container {
+  margin: 100px auto; /* Adds space below the navbar */
+  max-width: 600px; /* Centers the form and sets its width */
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading at the top of the form */
+.heading {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+/* Form container */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Adds spacing between form groups */
+}
+
+/* Label for inputs */
+.label {
+  font-weight: bold;
+  color: #555;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Wrapper for each input group */
+.inputGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styles for input fields */
+.input,
+.textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Prevent resizing for textarea */
+.textarea {
+  resize: none;
+  height: 120px; /* Default height for the textarea */
+}
+
+/* Submit button */
+.submitButton {
+  margin-bottom: 10px;
+  background-color: #0070f3;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #005bb5;
+}
+
+/* Cancel button */
+.cancelButton {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  margin-top: 10px; /* Adds spacing between the buttons */
+}
+
+.cancelButton:hover {
+  background-color: #cc0000;
+}

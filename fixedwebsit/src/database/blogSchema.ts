@@ -1,44 +1,42 @@
-import mongoose, { Schema } from "mongoose";
+// database/blogSchema.ts
 
-// typescript type (can also be an interface)
+import mongoose, { Schema, Document } from "mongoose";
 
-type IComment = {
+export interface IComment {
   user: string;
-  comment: string;
-  time: Date;
+  content: string;
+  date: Date;
 }
 
-type Blog = {
+export interface IBlog extends Document {
   title: string;
   slug: string;
   date: Date;
   image: string;
   imageAlt: string;
-  description: string; // for preview
-  content: string; // for individual blog page
-  comments: IComment[]; // array for comments
-};
+  description: string;
+  content: string;        // main blog content
+  comments: IComment[];
+}
 
-// mongoose schema
-const blogSchema = new Schema<Blog>({
+// Create Mongoose schema for the Blog
+const blogSchema = new Schema<IBlog>({
   title: { type: String, required: true },
   slug: { type: String, required: true },
-  date: { type: Date, required: false, default: new Date() },
-  image: { type: String, required: false },
-  imageAlt: { type: String, required: false },
+  date: { type: Date, default: Date.now }, // blog creation date
+  image: { type: String },
+  imageAlt: { type: String },
   description: { type: String, required: true },
   content: { type: String, required: true },
   comments: [
     {
       user: { type: String, required: true },
-      comment: { type: String, required: true },
-      time: { type: Date, required: true, default: new Date() },
+      content: { type: String, required: true },
+      date: { type: Date, required: true, default: Date.now },
     },
   ],
 });
 
-// defining the collection and model
-const Blog = mongoose.models["blogs"] || mongoose.model("blogs", blogSchema);
-
+// Define the Mongoose model
+const Blog = mongoose.models["blogs"] || mongoose.model<IBlog>("blogs", blogSchema);
 export default Blog;
-

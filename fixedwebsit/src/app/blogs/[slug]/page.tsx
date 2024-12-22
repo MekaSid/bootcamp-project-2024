@@ -1,7 +1,8 @@
-import Blog from "@/database/blogSchema";
+// src/app/blogs/[slug]/page.tsx
+
 import Image from "next/image";
 import style from "./blogpage.module.css";
-import Comment from "@/components/comments/Comment";
+import AddCommentButton from "@/components/blog/addComment";
 
 type Props = {
   params: { slug: string };
@@ -19,18 +20,22 @@ async function getBlog(slug: string) {
 
     return res.json();
   } catch (err: unknown) {
-    console.log(`error: ${err}`);
+    console.error(`Error: ${err}`);
     return null;
   }
 }
 
-export default async function BlogScreen({ params: { slug } }: Props) {
-  const blog: Blog = await getBlog(slug);
+export default async function BlogScreen({ params }: { params: { slug: string } }) {
+  const { slug } = params; // Extract slug from params
+
+  console.log(`Submitting comment for slug: ${slug}`);
+
+  const blog = await getBlog(slug);
 
   if (!blog) {
     return (
       <div>
-        <h1 className="pageTitle">404 - Blog Not Found</h1>
+        <h1 className={style.pageTitle}>404 - Blog Not Found</h1>
       </div>
     );
   }
@@ -43,8 +48,8 @@ export default async function BlogScreen({ params: { slug } }: Props) {
           className={style.blogImage}
           src={blog.image}
           alt={blog.imageAlt}
-          width={600} /* Adjusted for responsiveness */
-          height={400} /* Adjusted for responsiveness */
+          width={600}
+          height={400}
         />
       </div>
       <div className={style.blogContainer}>
@@ -54,7 +59,7 @@ export default async function BlogScreen({ params: { slug } }: Props) {
       <div className={style.blogComments}>
         <h3>Comments</h3>
         {blog.comments.length > 0 ? (
-          blog.comments.map((comment: any, index: any) => (
+          blog.comments.map((comment: any, index: number) => (
             <div key={index} className={style.comment}>
               <p className={style.commentUser}>{comment.user}</p>
               <p className={style.commentContent}>{comment.content}</p>
@@ -64,6 +69,8 @@ export default async function BlogScreen({ params: { slug } }: Props) {
           <p>No comments yet. Be the first to comment!</p>
         )}
       </div>
+
+      <AddCommentButton slug={slug} />
     </div>
   );
 }
