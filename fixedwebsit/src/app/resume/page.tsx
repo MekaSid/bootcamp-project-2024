@@ -1,21 +1,18 @@
-// src/pages/ResumePage.tsx
-
 import React from 'react';
-import Education from '../../components/resume/Education';
-import Skills from '../../components/resume/Skills';
-import ProfessionalExperience from '../../components/resume/Experience';
-import Projects from '../../components/resume/Projects';
-import styles from './resume.module.css';
+import style from './resume.module.css';
 
 const ResumePage: React.FC = () => {
   return (
-    
-    <div className={styles.resumeContainer}>
-      <h1 className={styles.pageTitle}>Resume</h1>
-      <Education />
-      <Skills />
-      <ProfessionalExperience />
-      <Projects />
+    <div className={style.PDFContainer}>
+      <h1 className={style.pageTitle}>Resume</h1>
+      <a href="/resume.pdf" download className={style.download}>
+        Click to Download
+      </a>
+      <iframe
+        src="/resume.pdf#zoom=100"
+        className={style.embeddedPDF}
+        title="Embedded Resume"
+      ></iframe>
     </div>
   );
 };
